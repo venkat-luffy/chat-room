@@ -7,13 +7,14 @@ import java.sql.SQLException;
 public class Database {
     public static Connection getConnection() throws SQLException {
         try {
-            // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Return connection to the database
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/chat_room", "root", "root");
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            throw new SQLException("Database connection error", e);
         }
+        return DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/chat_room",  // <-- your database URL
+            "root",                                // <-- your username
+            "root"                         // <-- your password
+        );
     }
 }
